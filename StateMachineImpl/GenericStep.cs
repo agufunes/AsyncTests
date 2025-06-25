@@ -13,10 +13,7 @@ namespace StateMachine
         public string Name { get; set; }
         public FilingStatus Status { get; set; }
         public string? ErrorMessage { get; set; }
-        public DateTime? CompletedAt { get; set; }
-        public List<string> Prerequisites { get; set; } = new List<string>();
-        public Func<GenericStep, Task<bool>>? ExecuteAction { get; set; }
-        public Dictionary<string, object> Data { get; set; } = new Dictionary<string, object>();
+        public List<GenericStep> Prerequisites { get; set; } = [];
 
         public GenericStep(string id, string name)
         {
@@ -27,11 +24,11 @@ namespace StateMachine
         /// <summary>
         /// Add a prerequisite step by ID
         /// </summary>
-        public GenericStep AddPrerequisite(string stepId)
+        public GenericStep AddPrerequisite(GenericStep step)
         {
-            if (!Prerequisites.Contains(stepId))
+            if (Prerequisites.All(s => s.Id != step.Id))
             {
-                Prerequisites.Add(stepId);
+                Prerequisites.Add(step);
             }
             return this;
         }
@@ -39,9 +36,9 @@ namespace StateMachine
         /// <summary>
         /// Add multiple prerequisite steps by ID
         /// </summary>
-        public GenericStep AddPrerequisites(params string[] stepIds)
+        public GenericStep AddPrerequisites(params GenericStep[] steps)
         {
-            foreach (var stepId in stepIds)
+            foreach (var stepId in steps)
             {
                 AddPrerequisite(stepId);
             }
@@ -56,13 +53,9 @@ namespace StateMachine
             Status = status;
         }
 
-        /// <summary>
-        /// Set the execution action for this step
-        /// </summary>
-        public GenericStep SetExecuteAction(Func<GenericStep, Task<bool>> action)
+        private bool AreAllPrerequisitesOk()
         {
-            ExecuteAction = action;
-            return this;
+            return Prerequisites.All(s => s.Status == FilingStatus.OK);
         }
 
     }

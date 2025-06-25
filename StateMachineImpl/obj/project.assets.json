@@ -8,26 +8,25 @@
     "net9.0": []
   },
   "packageFolders": {
-    "/Users/agustinfunes/.nuget/packages/": {}
+    "C:\\Users\\bsas_\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/agustinfunes/Dev/repos/net/Examples/AsyncTests/StateMachineImpl/StateMachineImpl.csproj",
+      "projectUniqueName": "C:\\Users\\bsas_\\OneDrive\\Documentos\\repos\\net\\AsyncExamples\\AsyncTests\\StateMachineImpl\\StateMachineImpl.csproj",
       "projectName": "StateMachineImpl",
-      "projectPath": "/Users/agustinfunes/Dev/repos/net/Examples/AsyncTests/StateMachineImpl/StateMachineImpl.csproj",
-      "packagesPath": "/Users/agustinfunes/.nuget/packages/",
-      "outputPath": "/Users/agustinfunes/Dev/repos/net/Examples/AsyncTests/StateMachineImpl/obj/",
+      "projectPath": "C:\\Users\\bsas_\\OneDrive\\Documentos\\repos\\net\\AsyncExamples\\AsyncTests\\StateMachineImpl\\StateMachineImpl.csproj",
+      "packagesPath": "C:\\Users\\bsas_\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\bsas_\\OneDrive\\Documentos\\repos\\net\\AsyncExamples\\AsyncTests\\StateMachineImpl\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/agustinfunes/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\bsas_\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {},
-        "https://nuget.pkg.github.com/agufunes/index.json": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
@@ -45,7 +44,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net9.0": {
@@ -66,7 +65,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.203/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

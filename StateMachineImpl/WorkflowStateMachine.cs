@@ -1,9 +1,9 @@
+using CommonsLibrary.Dtos.FilingsService;
 using StateMachine;
 
 public class GenericWorkflowStateMachine
 {
     private readonly Dictionary<string, GenericStep> _steps = new();
-    private readonly ProcessState _processState = new();
 
     /// <summary>
     /// Add a step to the workflow
@@ -16,24 +16,17 @@ public class GenericWorkflowStateMachine
         _steps[step.Id] = step;
     }
 
-    /// <summary>
-    /// Execute a step by its ID
-    /// </summary>
-    public async Task ExecuteStepAsync(string stepId)
+    public (bool, string?) CanExecuteStep(string stepId)
     {
+        // Get the step
         if (!_steps.TryGetValue(stepId, out var step))
-            throw new KeyNotFoundException($"No step found with ID '{stepId}'.");
-
-        if (!CanExecuteStep(step))
-            throw new InvalidStateTransitionException($"Cannot execute step '{stepId}' due to unmet prerequisites.");
-
-        _processState.FileStatus = StepStatus.InProgress; // Example of updating state
-        await step.ExecuteAsync();
-        _processState.FileStatus = StepStatus.OK; // Update status after execution
-    }
-
-    private bool CanExecuteStep(GenericStep step)
-    {
-        return step.Prerequisites.All(p => _steps.TryGetValue(p, out var prereq) && prereq.Status == StepStatus.OK);
+            return (false, $"No step found with ID '{stepId}'.");
+        // Check if the status is not PENDING
+        if (step.Status != FilingStatus.PENDING)
+            return (false, "Status is not PENDING");
+        // Check if the pre requisites are all OK
+        if (step.AreAllPrerequisitesOk())
+            return (false, "Previous status are not OK");
+        return (true,"");
     }
 }
