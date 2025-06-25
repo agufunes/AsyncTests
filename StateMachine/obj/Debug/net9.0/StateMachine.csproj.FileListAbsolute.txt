@@ -1,0 +1,14 @@
+/Users/agustinfunes/Dev/repos/net/Examples/AsyncTests/StateMachine/bin/Debug/net9.0/StateMachine
+/Users/agustinfunes/Dev/repos/net/Examples/AsyncTests/StateMachine/bin/Debug/net9.0/StateMachine.deps.json
+/Users/agustinfunes/Dev/repos/net/Examples/AsyncTests/StateMachine/bin/Debug/net9.0/StateMachine.runtimeconfig.json
+/Users/agustinfunes/Dev/repos/net/Examples/AsyncTests/StateMachine/bin/Debug/net9.0/StateMachine.dll
+/Users/agustinfunes/Dev/repos/net/Examples/AsyncTests/StateMachine/bin/Debug/net9.0/StateMachine.pdb
+/Users/agustinfunes/Dev/repos/net/Examples/AsyncTests/StateMachine/obj/Debug/net9.0/StateMachine.GeneratedMSBuildEditorConfig.editorconfig
+/Users/agustinfunes/Dev/repos/net/Examples/AsyncTests/StateMachine/obj/Debug/net9.0/StateMachine.AssemblyInfoInputs.cache
+/Users/agustinfunes/Dev/repos/net/Examples/AsyncTests/StateMachine/obj/Debug/net9.0/StateMachine.AssemblyInfo.cs
+/Users/agustinfunes/Dev/repos/net/Examples/AsyncTests/StateMachine/obj/Debug/net9.0/StateMachine.csproj.CoreCompileInputs.cache
+/Users/agustinfunes/Dev/repos/net/Examples/AsyncTests/StateMachine/obj/Debug/net9.0/StateMachine.dll
+/Users/agustinfunes/Dev/repos/net/Examples/AsyncTests/StateMachine/obj/Debug/net9.0/refint/StateMachine.dll
+/Users/agustinfunes/Dev/repos/net/Examples/AsyncTests/StateMachine/obj/Debug/net9.0/StateMachine.pdb
+/Users/agustinfunes/Dev/repos/net/Examples/AsyncTests/StateMachine/obj/Debug/net9.0/StateMachine.genruntimeconfig.cache
+/Users/agustinfunes/Dev/repos/net/Examples/AsyncTests/StateMachine/obj/Debug/net9.0/ref/StateMachine.dll
