@@ -1,24 +1,22 @@
 ﻿using CommonsLibrary.Dtos.FilingsService;
 using StateMachine;
+using StateMachineImpl;
 
-GenericStep stepFile = new GenericStep("FILE", "Import XBRL Filing Files");
+// Step stepFile = new("FILE", "Import XBRL Filing Files", FilingStatus.OK);
 
-GenericStep stepFact = new GenericStep("FACT", "Import Facts from XBRL Filing")
-.AddPrerequisite(stepFile);
-GenericStep stepPrice = new GenericStep("PRICE", "Calculate Prices from Facts")
-.AddPrerequisites(stepFile, stepFact);
+// Step stepFact = new Step("FACT", "Import Facts from XBRL Filing", FilingStatus.PENDING)
+// .AddPrerequisite(stepFile);
+
+// Step stepPrice = new Step("PRICE", "Calculate Prices from Facts", FilingStatus.PENDING)
+// .AddPrerequisites(stepFile, stepFact);
+
+var workflow = new FilingProcessingWorkflow(FilingStatus.OK, FilingStatus.ERROR, FilingStatus.PENDING);
+
+Console.WriteLine(workflow.CanExecuteStep("FILE", false));
+Console.WriteLine(workflow.CanExecuteStep("FACT", false));
+Console.WriteLine(workflow.CanExecuteStep("PRICE", false));
 
 
-stepFile.SetStatus(FilingStatus.OK);
-stepFact.SetStatus(FilingStatus.PENDING);
-stepPrice.SetStatus(FilingStatus.PENDING);
-
-GenericWorkflowStateMachine workflow = new();
-
-workflow.AddStep(stepFile);
-workflow.AddStep(stepFact);
-workflow.AddStep(stepPrice);
-
-Console.WriteLine(workflow.CanExecuteStep("FILE"));
-Console.WriteLine(workflow.CanExecuteStep("FACT"));
-Console.WriteLine(workflow.CanExecuteStep("PRICE"));
+Console.WriteLine(workflow.CanExecuteStep("FILE", true));
+Console.WriteLine(workflow.CanExecuteStep("FACT", true));
+Console.WriteLine(workflow.CanExecuteStep("PRICE", true));

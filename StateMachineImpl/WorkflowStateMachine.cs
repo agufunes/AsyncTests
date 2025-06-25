@@ -1,32 +1,43 @@
 using CommonsLibrary.Dtos.FilingsService;
 using StateMachine;
 
-public class GenericWorkflowStateMachine
+namespace StateMachineImpl
 {
-    private readonly Dictionary<string, GenericStep> _steps = new();
-
-    /// <summary>
-    /// Add a step to the workflow
-    /// </summary>
-    public void AddStep(GenericStep step)
+    public class FilingProcessingWorkflow
     {
-        if (_steps.ContainsKey(step.Id))
-            throw new InvalidOperationException($"Step with ID '{step.Id}' already exists.");
+        private readonly Dictionary<string, Step> _steps = [];
 
-        _steps[step.Id] = step;
-    }
+        public FilingProcessingWorkflow(
+            FilingStatus fileStatus,
+            FilingStatus factStatus,
+            FilingStatus priceStatus)
+        {
+            // Initialize the workflow with default steps
+            AddStep(new Step("FILE", "Import XBRL Filing Files", fileStatus));
+            AddStep(new Step("FACT", "Import Facts from XBRL Filing", factStatus)
+                .AddPrerequisite(_steps["FILE"]));
+            AddStep(new Step("PRICE", "Calculate Prices from Facts", priceStatus)
+                .AddPrerequisites(_steps["FILE"], _steps["FACT"]));
+        }
 
-    public (bool, string?) CanExecuteStep(string stepId)
-    {
-        // Get the step
-        if (!_steps.TryGetValue(stepId, out var step))
-            return (false, $"No step found with ID '{stepId}'.");
-        // Check if the status is not PENDING
-        if (step.Status != FilingStatus.PENDING)
-            return (false, "Status is not PENDING");
-        // Check if the pre requisites are all OK
-        if (step.AreAllPrerequisitesOk())
-            return (false, "Previous status are not OK");
-        return (true,"");
+        /// <summary>
+        /// Add a step to the workflow
+        /// </summary>
+        private FilingProcessingWorkflow AddStep(Step step)
+        {
+            if (_steps.ContainsKey(step.Id))
+                throw new InvalidOperationException($"Step with ID '{step.Id}' already exists.");
+
+            _steps[step.Id] = step;
+            return this;
+        }
+
+        public (bool, string) CanExecuteStep(string stepId, bool replace)
+        {
+            // Get the step
+            if (!_steps.TryGetValue(stepId, out var step))
+                return (false, $"No step found with ID '{stepId}'.");
+            return step.CanExecute(replace);
+        }
     }
 }
